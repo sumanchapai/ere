@@ -27,12 +27,9 @@ information below for format for <date>.
 
 ### Date format
 
-Note that the legal date formats are "YYYY-MM-DD$xx", "MM-DD$xx" where "xx" is
-supposed to be calendar prefixes (BS for bikram sambat and AD for Julian
-Calendar). Note that "MM$xx" and "DD$xx" are both valid formats as well, but
-which one is meant day or month depends on the context at which the date command
-is used. When used with the `check` command only `MM$xx` is inferred and when
-used with the `add` command only `DD$xx` is inferred.
+Note that the legal date formats are "YYYY-MM-DD-xx", "where "xx" is "BS" or
+"AD". In place of "YYYY", or "MM", or "DD", you can have a wildcard character
+"*" to represent a placeholder that matches anything at that place.
 
 ## `ere add <date>`
 
@@ -41,19 +38,19 @@ Adds a reminder on a given date. Check [date format](###date-format).
 #### One off events
 
 To be reminded about poster presentation coming up on 29th october, run\
-`ere add 2025-10-29$AD --name "poster presentaion"`.
+`ere add 2025-10-29-AD --name "poster presentaion"`.
 
 To also be reminded the poster presentation one day before the presentation date
-run\ `ere add 2025-10-29$AD --name "poster presentaion" --knock="1"`.
+run\ `ere add 2025-10-29-AD --name "poster presentaion" --knock="1"`.
 
 To be reminded the poster presentation every day for one week before the
 presentation run\
-`ere add 2025-10-29$AD --name "poster presentaion" --knock="1,2,3,4,5,6,7"`.
+`ere add 2025-10-29-AD --name "poster presentaion" --knock="1,2,3,4,5,6,7"`.
 
 #### Yearly events (like birthdays)
 
 To be reminded about your friend's birthday on Kartik 12, run\
-`ere add 7-12$BS --name "suman's birthday" --knock="1"`.
+`ere add *-7-12-BS --name "suman's birthday" --knock="1"`.
 
 Note that we don't mention year in the date format because that would make it a
 one off event. We want to be reminded every year on our friend's birthday.
@@ -62,13 +59,13 @@ one off event. We want to be reminded every year on our friend's birthday.
 
 To be reminded about Sakranti (first day of the month in the Nepali calendar),
 run\
-`ere add 1$BS --name "sakranti"`.
+`ere add *-*-1-BS --name "sakranti"`.
 
 To be reminded about taking the trash out on the 7th of the month. run\
-`ere add 7$AD --name "take the trash out"`.
+`ere add *-*-7-AD --name "take the trash out"`.
 
 To be reminded one day before taking the trash out. run\
-`ere add 7$AD --name "take the trash out" --knock="1"`.
+`ere add *-*-7-AD --name "take the trash out" --knock="1"`.
 
 #### Events files:
 

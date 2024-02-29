@@ -20,6 +20,8 @@ var dailyCmd = &cobra.Command{
 	Run: func(_ *cobra.Command, _ []string) {
 		if !HasRunTodaysUpdates() {
 			// Run the check command with today's date
+			Check(getTodaysDateInAD())
+			Check(getTodaysDateInBS())
 			// Then mark today's updates as read
 			MarkTodaysUpdatesAsRead()
 		}
