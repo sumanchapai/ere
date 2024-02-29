@@ -10,6 +10,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "ere",
 	Short: "Event reminder",
+	Long:  `Event reminder`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
