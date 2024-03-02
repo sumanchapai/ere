@@ -31,7 +31,7 @@ Note that the legal date formats are "YYYY-MM-DD-xx", "where "xx" is "BS" or
 "AD". In place of "YYYY", or "MM", or "DD", you can have a wildcard character
 "*" to represent a placeholder that matches anything at that place.
 
-## `ere add <date>`
+## `ere add <date> --name "", --knock=""`
 
 Adds a reminder on a given date. Check [date format](###date-format).
 
@@ -71,9 +71,7 @@ To be reminded one day before taking the trash out. run\
 
 These are the files where the information about the event will be kept.
 
-- weekly.json
-- monthly.json
-- oneoff.json
+- events.json
 
 ### How does the `ere check` work ?
 
