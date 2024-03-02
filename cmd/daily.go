@@ -21,7 +21,6 @@ var dailyCmd = &cobra.Command{
 		if !HasRunTodaysUpdates() {
 			// Run the check command with today's date
 			Check(getTodaysDateInAD())
-			Check(getTodaysDateInBS())
 			// Then mark today's updates as read
 			MarkTodaysUpdatesAsRead()
 		}
@@ -44,9 +43,6 @@ func checkedDatesFilesName() string {
 			log.Fatal(err)
 		}
 	}
-	// if f.IsDir() {
-	// 	log.Fatalf("expecting a file %v got a directory", checkedFile)
-	// }
 	return checkedFile
 }
 

@@ -113,6 +113,7 @@ func parseDateString(date string) (Date, error) {
 	// Month
 	if parts[1] == "*" {
 		toReturn.monthWildCard = true
+	} else {
 		monthInt, err := strconv.ParseInt(parts[1], 10, 32)
 		if err != nil {
 			return toReturn, err
@@ -125,6 +126,7 @@ func parseDateString(date string) (Date, error) {
 	// Day
 	if parts[2] == "*" {
 		toReturn.dayWildCard = true
+	} else {
 		dayInt, err := strconv.ParseInt(parts[2], 10, 32)
 		if err != nil {
 			return toReturn, err
@@ -143,4 +145,50 @@ func parseDateString(date string) (Date, error) {
 		return toReturn, errInvalidCalendarOnDate
 	}
 	return toReturn, nil
+}
+
+// Return date for all calendars from a given date of a certain calendar
+func datesForAllCalendar(date Date) map[Calendar]Date {
+	datesByCalendar := make(map[Calendar]Date)
+	datesByCalendar[AD] = date.toAD()
+	datesByCalendar[BS] = date.toBS()
+	return datesByCalendar
+}
+
+// Returns the BS date for the given date
+// Preconditions:
+// 1. No wildcard can be present in year, month, or day
+func (date Date) toBS() Date {
+	if date.calendar == BS {
+		return date
+	}
+	var bsDate Date
+	bsDate.calendar = BS
+	nepaliDate, err := dateConverter.EnglishToNepali(date.year, date.month, date.day)
+	if err != nil {
+		log.Fatal(err)
+	}
+	bsDate.year = nepaliDate[0]
+	bsDate.month = nepaliDate[1]
+	bsDate.day = nepaliDate[2]
+	return bsDate
+}
+
+// Returns the AD date for the given date
+// Preconditions:
+// 1. No wildcard can be present in year, month, or day
+func (date Date) toAD() Date {
+	if date.calendar == AD {
+		return date
+	}
+	var adDate Date
+	adDate.calendar = AD
+	englishDate, err := dateConverter.NepaliToEnglish(date.year, date.month, date.day)
+	if err != nil {
+		log.Fatal(err)
+	}
+	adDate.year = englishDate[0]
+	adDate.month = englishDate[1]
+	adDate.day = englishDate[2]
+	return adDate
 }

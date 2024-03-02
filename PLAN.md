@@ -91,3 +91,8 @@ run `ere search`
 
 List the events whose name matches the search-string. The search string is a
 regular expression.
+
+### Version control
+
+`git add/commit` after each add/edit/delete. Add a command, maybe `ere pull` to
+cd into appropriate directory and git pull the updates.
