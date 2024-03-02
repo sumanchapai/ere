@@ -9,6 +9,11 @@ type Event struct {
 	Knock []int
 }
 
+type KnockEvent struct {
+	Event
+	ComingUpIn int
+}
+
 func (e Event) String() string {
 	return fmt.Sprintf("Event{Id: %v, Date: %v, Title: %v, Knock: %v}\n", e.Id, e.Date, e.Title, e.Knock)
 }
@@ -16,7 +21,7 @@ func (e Event) String() string {
 // A collection of matching events
 type MatchingEvents struct {
 	Today []Event
-	Knock []Event
+	Knock []KnockEvent
 }
 
 // Returns matching events for the given date
@@ -26,7 +31,7 @@ type MatchingEvents struct {
 func CheckEventsOnDate(date Date, events []Event) MatchingEvents {
 	var matches MatchingEvents
 	matches.Today = make([]Event, 0)
-	matches.Knock = make([]Event, 0)
+	matches.Knock = make([]KnockEvent, 0)
 	for _, event := range events {
 		eventDate, err := parseDateString(event.Date)
 		if err != nil {
@@ -43,9 +48,10 @@ func CheckEventsOnDate(date Date, events []Event) MatchingEvents {
 		// Check if the event is to be knocked
 	innner:
 		for _, knock := range event.Knock {
-			subtractedDate := DateAfterSubtraction(date, knock)
-			if DateMatches(date, subtractedDate) {
-				matches.Knock = append(matches.Knock, event)
+			addedDate := DateAfterAddition(date, knock)
+			if DateMatches(eventDate, addedDate) {
+				knockEvent := KnockEvent{Event: event, ComingUpIn: knock}
+				matches.Knock = append(matches.Knock, knockEvent)
 				break innner
 			}
 		}

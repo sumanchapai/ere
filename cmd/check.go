@@ -70,7 +70,7 @@ func Check(d Date) {
 	// Todo get events from JSON file
 	events := eventsFromEventsFile()
 	todayEvents := make([]Event, 0)
-	knockEvents := make([]Event, 0)
+	knockEvents := make([]KnockEvent, 0)
 	for _, date := range dates {
 		matches := CheckEventsOnDate(date, events)
 		todayEvents = append(todayEvents, matches.Today...)
@@ -89,12 +89,18 @@ func Check(d Date) {
 	if len(knockEvents) == 0 {
 		fmt.Println("no events")
 	}
-	PrintEvents(knockEvents)
+	PrintKnockEvents(knockEvents)
 }
 
 func PrintEvents(events []Event) {
 	for _, e := range events {
-		fmt.Printf("%v - \t%v\n", e.Id, e.Title)
+		fmt.Printf("%v\n", e.Title)
+	}
+}
+
+func PrintKnockEvents(events []KnockEvent) {
+	for _, e := range events {
+		fmt.Printf("%v \t - in %v days\n", e.Title, e.ComingUpIn)
 	}
 }
 

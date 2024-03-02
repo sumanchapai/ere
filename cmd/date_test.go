@@ -2,27 +2,27 @@ package cmd
 
 import "testing"
 
-func TestDateAfterSubtraction(t *testing.T) {
+func TestDateAfterAddition(t *testing.T) {
 	type TestCase struct {
-		candidate    string
-		subtractDays int
-		expect       string
+		candidate string
+		addDays   int
+		expect    string
 	}
 	testCases := []TestCase{
-		{candidate: "2080-1-12-BS", subtractDays: 5, expect: "2080-01-07-BS"},
-		{candidate: "2080-11-2-BS", subtractDays: 5, expect: "2080-10-26-BS"},
-		{candidate: "2024-3-2-AD", subtractDays: 3, expect: "2024-02-28-AD"},
+		{candidate: "2080-1-12-BS", addDays: 5, expect: "2080-01-17-BS"},
+		{candidate: "2080-10-29-BS", addDays: 5, expect: "2080-11-05-BS"},
+		{candidate: "2024-2-28-AD", addDays: 3, expect: "2024-03-02-AD"},
 	}
 	for _, testCase := range testCases {
 		candidateDate, err := parseDateString(testCase.candidate)
 		if err != nil {
 			panic(err)
 		}
-		gotDate := DateAfterSubtraction(candidateDate, testCase.subtractDays)
+		gotDate := DateAfterAddition(candidateDate, testCase.addDays)
 		if gotDate.String() != testCase.expect {
-			t.Errorf("DateAfterSubtraction(%v, %v) got %v expected %v",
+			t.Errorf("DateAfterAddition(%v, %v) got %v expected %v",
 				testCase.candidate,
-				testCase.subtractDays,
+				testCase.addDays,
 				gotDate.String(),
 				testCase.expect)
 		}
