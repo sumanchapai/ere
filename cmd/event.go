@@ -14,6 +14,21 @@ type KnockEvent struct {
 	ComingUpIn int
 }
 
+// This struct is made for to implement sort on slice of knock events
+type KnockEvents []KnockEvent
+
+func (k KnockEvents) Len() int {
+	return len(k)
+}
+
+func (k KnockEvents) Swap(i, j int) {
+	k[i], k[j] = k[j], k[i]
+}
+
+func (k KnockEvents) Less(i, j int) bool {
+	return k[i].ComingUpIn < k[j].ComingUpIn
+}
+
 func (e Event) String() string {
 	return fmt.Sprintf("Event{Id: %v, Date: %v, Title: %v, Knock: %v}\n", e.Id, e.Date, e.Title, e.Knock)
 }

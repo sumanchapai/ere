@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sort"
 
 	"github.com/spf13/cobra"
 )
@@ -70,12 +71,13 @@ func Check(d Date) {
 	// Todo get events from JSON file
 	events := eventsFromEventsFile()
 	todayEvents := make([]Event, 0)
-	knockEvents := make([]KnockEvent, 0)
+	knockEvents := make(KnockEvents, 0)
 	for _, date := range dates {
 		matches := CheckEventsOnDate(date, events)
 		todayEvents = append(todayEvents, matches.Today...)
 		knockEvents = append(knockEvents, matches.Knock...)
 	}
+	fmt.Printf("%v --- %v\n", d.toAD(), d.toBS())
 	fmt.Println("Reminders")
 	fmt.Println("======================")
 	if len(todayEvents) == 0 {
@@ -89,6 +91,7 @@ func Check(d Date) {
 	if len(knockEvents) == 0 {
 		fmt.Println("no events")
 	}
+	sort.Sort(knockEvents)
 	PrintKnockEvents(knockEvents)
 }
 

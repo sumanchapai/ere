@@ -39,8 +39,11 @@ var addCmd = &cobra.Command{
 		runAddCommand(date, title, knocks)
 	},
 	Args: func(_ *cobra.Command, args []string) error {
-		if len(args) != 1 {
-			return errors.New("requres date argument")
+		if len(args) < 1 {
+			return errors.New("requries date argument")
+		}
+		if len(args) > 1 {
+			return fmt.Errorf("takes only one argument, given %v", len(args))
 		}
 		_, err := parseDateString(args[0])
 		return err
