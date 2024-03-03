@@ -18,7 +18,7 @@ presentation run\
 #### Yearly events (like birthdays)
 
 To be reminded about your friend's birthday on Kartik 12, run\
-`ere add *-7-12-BS --title "suman's birthday" --knock="1"`.
+`ere add "*-7-12-BS" --title "suman's birthday" --knock="1"`.
 
 Note that we don't mention year in the date format because that would make it a
 one off event. We want to be reminded every year on our friend's birthday.
@@ -27,13 +27,13 @@ one off event. We want to be reminded every year on our friend's birthday.
 
 To be reminded about Sakranti (first day of the month in the Nepali calendar),
 run\
-`ere add *-*-1-BS --title "sakranti"`.
+`ere add "*-*-1-BS" --title "sakranti"`.
 
 To be reminded about taking the trash out on the 7th of the month. run\
-`ere add *-*-7-AD --title "take the trash out"`.
+`ere add "*-*-7-AD" --title "take the trash out"`.
 
 To be reminded one day before taking the trash out. run\
-`ere add *-*-7-AD --title "take the trash out" --knock="1"`.
+`ere add "*-*-7-AD" --title "take the trash out" --knock="1"`.
 
 ## Viewing events
 
@@ -61,22 +61,24 @@ run `ere check` yourself anytime to see events for any day.
 
 ## Syncing events between two computers.
 
-All the data file is stored locally in `.ere` folder in the home directory. Run
-`ls ~/.ere` to see these files. The list of events is stored in a file called
-`~/.ere/events.json`. I have personally created this file in my dotfiles
+All the data files are stored locally in `.ere` folder in the home directory.
+Run `ls ~/.ere` to see these files. The list of events is stored in a file
+called `~/.ere/events.json`. I have personally created this file in my dotfiles
 directory and created a symlink to `~/.ere/events.json` by running:
 
 ```
+mkdir -p ~/dotfiles/ere
 ln -sf "${HOME}/dotfiles/ere/events.json" "${HOME}/.ere/events.json"
 ```
 
-This means that the events.json file is in my dotfiles which is git version
-controllled. Now if I install `ere` on another computer and pull my dotfiles
-directory (and create the symlink like mentioned above), I have the same list of
-events available on both computers. Note tho that, you probably don't want to do
-this if your dotfiles directory is public because this would make your events
-public.
+Note that my dotfiles folder lives in the home directory.
+
+Because my dotfiles directory is git version controllled, when I install `ere`
+on another computer and pull my dotfiles directory (and create the symlink like
+mentioned above), I have the same list of events available on both computers.
+Note though that, you probably don't want to do this if your dotfiles directory
+is public because this would make your events public.
 
 ## Installation
 
-Clone this repo then run ```go install .`
+Clone this repo then run `go install .`
