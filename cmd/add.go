@@ -98,6 +98,11 @@ func runAddCommand(date Date, title string, knock []int) {
 	// Get events list, and append to the events list
 	events := eventsFromEventsFile()
 	events = append(events, event)
+	saveEvents(events)
+}
+
+// Save events to the events file
+func saveEvents(events []Event) {
 	// Save the events
 	configFolder := ereConfigFolder()
 	eventsFile := filepath.Join(configFolder, ereEventsFileName)
