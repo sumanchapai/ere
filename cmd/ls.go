@@ -1,6 +1,10 @@
 package cmd
 
 import (
+	"fmt"
+	"sort"
+	"strings"
+
 	"github.com/fatih/color"
 	"github.com/rodaine/table"
 	"github.com/spf13/cobra"
@@ -25,10 +29,16 @@ var (
 )
 
 func lsTable(events []Event) {
-	tbl := table.New("ID", "Title", "Date")
+	tbl := table.New("ID", "Title", "Date", "Knocks")
 	tbl.WithHeaderFormatter(headerFmt).WithFirstColumnFormatter(yellow)
 	for _, e := range events {
-		tbl.AddRow(e.Id, e.Title, e.Date)
+		knocks := make([]string, 0)
+		// Sort the slice
+		sort.Slice(e.Knock, func(i, j int) bool { return e.Knock[i] < e.Knock[j] })
+		for _, k := range e.Knock {
+			knocks = append(knocks, fmt.Sprint(k))
+		}
+		tbl.AddRow(e.Id, e.Title, e.Date, strings.Join(knocks, ", "))
 	}
 	tbl.Print()
 }

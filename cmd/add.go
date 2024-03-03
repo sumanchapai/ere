@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -59,7 +60,7 @@ func init() {
 
 // Returns the title after parsing, if the parsing fails, the error returned is non-nil
 func parseTitle(s string) (string, error) {
-	return s, nil
+	return strings.TrimSpace(s), nil
 }
 
 // Parse the knock flag and return the list of integers
@@ -80,6 +81,7 @@ func parseKnock(knock string) ([]int, error) {
 		}
 		knocks = append(knocks, int(val))
 	}
+	sort.Slice(knocks, func(i, j int) bool { return knocks[i] < knocks[j] })
 	return knocks, nil
 }
 
@@ -97,6 +99,12 @@ func runAddCommand(date Date, title string, knock []int) {
 	event.Knock = knock
 	// Get events list, and append to the events list
 	events := eventsFromEventsFile()
+	// Check if the event with same title and date already exists
+	for _, e := range events {
+		if e.Date == event.Date && e.Title == title {
+			log.Fatalf("event with given date and title already exists id: %v", e.Id)
+		}
+	}
 	events = append(events, event)
 	saveEvents(events)
 }
