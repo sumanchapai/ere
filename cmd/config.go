@@ -31,7 +31,7 @@ func ereConfigFolder() string {
 	} else if err != nil {
 		log.Fatal(err)
 	}
-	if !f.IsDir() {
+	if err == nil && !f.IsDir() {
 		log.Fatalf("expecting a directory %v got a file", folder)
 	}
 	return folder
