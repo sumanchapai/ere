@@ -73,7 +73,6 @@ func parseKnock(knock string) ([]int, error) {
 		return knocks, nil
 	}
 	for _, part := range parts {
-		fmt.Println("xyz", part)
 		part = strings.TrimSpace(part)
 		val, err := strconv.ParseInt(part, 10, 32)
 		if err != nil {

@@ -77,20 +77,20 @@ func Check(d Date) {
 		todayEvents = append(todayEvents, matches.Today...)
 		knockEvents = append(knockEvents, matches.Knock...)
 	}
-	fmt.Printf("%v --- %v\n", d.toAD(), d.toBS())
-	fmt.Println("Reminders")
-	fmt.Println("======================")
-	if len(todayEvents) == 0 {
-		fmt.Println("no events")
-	}
+	// fmt.Printf("%v --- %v\n", d.toAD(), d.toBS())
+	// fmt.Println("Reminders")
+	// fmt.Println("======================")
+	// if len(todayEvents) == 0 {
+	// 	fmt.Println("no events")
+	// }
 	PrintEvents(todayEvents)
-	fmt.Printf("\n\n")
+	// fmt.Printf("\n\n")
 
-	fmt.Println("Knocks")
-	fmt.Println("======================")
-	if len(knockEvents) == 0 {
-		fmt.Println("no events")
-	}
+	// fmt.Println("Knocks")
+	// fmt.Println("======================")
+	// if len(knockEvents) == 0 {
+	// 	fmt.Println("no events")
+	// }
 	sort.Sort(knockEvents)
 	PrintKnockEvents(knockEvents)
 }
