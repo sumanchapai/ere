@@ -66,9 +66,15 @@ func parseTitle(s string) (string, error) {
 // as the knock value. If the parsing fails, the error returned is non-nil
 func parseKnock(knock string) ([]int, error) {
 	knock = strings.TrimSpace(knock)
+	knock = strings.TrimSuffix(knock, ",")
 	parts := strings.Split(knock, ",")
 	knocks := make([]int, 0)
+	if knock == "" {
+		return knocks, nil
+	}
 	for _, part := range parts {
+		fmt.Println("xyz", part)
+		part = strings.TrimSpace(part)
 		val, err := strconv.ParseInt(part, 10, 32)
 		if err != nil {
 			return knocks, err
@@ -82,7 +88,11 @@ func parseKnock(knock string) ([]int, error) {
 // Prints the error and exists if encountered any error
 func runAddCommand(date Date, title string, knock []int) {
 	var event Event
-	event.Id = fmt.Sprint(time.Now().UnixNano())
+	// Note that by using UnixMilli as the ID, we are only decreasing
+	// the likelihood of two IDs being the same. That said, there is
+	// technically still some probability that two IDs might be the same
+	// but since our goal isn't to build a 100% system. Thus we don't bother.
+	event.Id = fmt.Sprint(time.Now().UnixMilli())
 	event.Date = date.String()
 	event.Title = title
 	event.Knock = knock
