@@ -16,12 +16,17 @@ var lsCmd = &cobra.Command{
 	},
 }
 
-func lsTable(events []Event) {
-	headerFmt := color.New(color.FgGreen, color.Underline).SprintfFunc()
-	columnFmt := color.New(color.FgYellow).SprintfFunc()
+// Colors
+var (
+	headerFmt          = color.New(color.FgGreen, color.Underline).SprintfFunc()
+	yellow             = color.New(color.FgYellow).SprintfFunc()
+	yellowAndUnderline = color.New(color.FgYellow, color.Underline).SprintfFunc()
+	green              = color.New(color.FgGreen).SprintfFunc()
+)
 
+func lsTable(events []Event) {
 	tbl := table.New("ID", "Title", "Date")
-	tbl.WithHeaderFormatter(headerFmt).WithFirstColumnFormatter(columnFmt)
+	tbl.WithHeaderFormatter(headerFmt).WithFirstColumnFormatter(yellow)
 	for _, e := range events {
 		tbl.AddRow(e.Id, e.Title, e.Date)
 	}

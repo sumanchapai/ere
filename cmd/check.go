@@ -77,33 +77,36 @@ func Check(d Date) {
 		todayEvents = append(todayEvents, matches.Today...)
 		knockEvents = append(knockEvents, matches.Knock...)
 	}
-	// fmt.Printf("%v --- %v\n", d.toAD(), d.toBS())
-	// fmt.Println("Reminders")
-	// fmt.Println("======================")
-	// if len(todayEvents) == 0 {
-	// 	fmt.Println("no events")
-	// }
+	fmt.Print(yellowAndUnderline("%v --- %v\n", d.toAD(), d.toBS()))
+	fmt.Printf("\n")
 	PrintEvents(todayEvents)
-	// fmt.Printf("\n\n")
-
-	// fmt.Println("Knocks")
-	// fmt.Println("======================")
-	// if len(knockEvents) == 0 {
-	// 	fmt.Println("no events")
-	// }
+	fmt.Printf("\n")
 	sort.Sort(knockEvents)
 	PrintKnockEvents(knockEvents)
 }
 
 func PrintEvents(events []Event) {
+	fmt.Print(green("Events:\n"))
+	if len(events) == 0 {
+		fmt.Println("no events")
+	}
 	for _, e := range events {
 		fmt.Printf("%v\n", e.Title)
 	}
 }
 
 func PrintKnockEvents(events []KnockEvent) {
+	fmt.Print(yellow("Knocks:\n"))
+	if len(events) == 0 {
+		fmt.Println("nothing knocking")
+		return
+	}
 	for _, e := range events {
-		fmt.Printf("%v \t - in %v days\n", e.Title, e.ComingUpIn)
+		if e.ComingUpIn == 1 {
+			fmt.Printf("in 1 day - %v\n", e.Title)
+		} else {
+			fmt.Printf("in %v days - %v\n", e.ComingUpIn, e.Title)
+		}
 	}
 }
 
