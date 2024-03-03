@@ -24,7 +24,7 @@ var checkCmd = &cobra.Command{
 Check command checks for your events and reminders on a given date. You could pass the date
 in any calendar system and it displays events on any calendar systems irrespective of the date
 
-You could search for events by AD (Julian) calendar:
+You could search for events by AD (Gregorian) calendar:
 ere check 2022-10-29-AD 
 
 OR by BS (Nepali) calendar: 

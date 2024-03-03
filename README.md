@@ -1,5 +1,5 @@
-This is an event reminder CLI. It currently supports two calendar systems Julian
-(A.D) and Nepali (B.S).
+This is an event reminder CLI. It currently supports two calendar systems
+Gregorian (A.D) and Nepali (B.S).
 
 ## Adding events
 
