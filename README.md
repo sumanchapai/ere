@@ -46,7 +46,8 @@ For example, to list events that have the word birthday in their title, run\
 
 ## Delete event
 
-Delete an event by given id by running `ere delete <id>`
+To delete an event by given id, run\
+`ere delete <id>`
 
 ## Checking for events
 
