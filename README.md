@@ -5,6 +5,9 @@ Gregorian (A.D) and Nepali (B.S).
 
 #### One off events
 
+To be reminded about calling mom tomorrow, run\
+`ere add +1 --title "call mom"`.
+
 To be reminded about poster presentation coming up on 29th october, run\
 `ere add 2025-10-29-AD --title "poster presentation"`.
 
@@ -51,15 +54,27 @@ To delete an event by given id, run\
 
 ## Checking for events
 
-Run `ere check` to check for today's events. You could also check for events at
-a particular date by running `ere check <date>`. For example:
-`ere check 2024-2-2-AD` to view events and knocks on 2nd Feb 2024. There's is
-also a command called `ere daily` that runs the `ere check` internally if
-`ere check` hasn't been run even once today. I have placed the `ere daily` at
-the end of my `~/.zshrc` file so that when I open the terminal for the first
-time on any given day, I see the events for that day. The next time I open
-terminal on that day, it doesn't show anything. But of course, I could just run
-`ere check` anytime to see events for that day or any day.
+To view today's events, you could also run\
+`ere check`
+
+To view yesterday's events, you could also run\
+`ere check -1`
+
+To view day after tomorrow's events, you could also run\
+`ere check 2`
+
+You could also check for events at a particular date by running
+`ere check <date>`. For example: `ere check 2024-2-2-AD` to view events and
+knocks on 2nd Feb 2024.
+
+### Automatically checking for today's events
+
+There's is also a command called `ere daily` that runs the `ere check`
+internally if `ere check` hasn't been run even once today. I have placed the
+`ere daily` at the end of my `~/.zshrc` file so that when I open the terminal
+for the first time on any given day, I see the events for that day. The next
+time I open terminal on that day, it doesn't show anything. But of course, I
+could just run `ere check` anytime to see events for that day or any day.
 
 ## Syncing events between two computers.
 

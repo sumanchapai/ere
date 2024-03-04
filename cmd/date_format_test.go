@@ -19,7 +19,7 @@ func TestParseDate(t *testing.T) {
 		}},
 	}
 	for _, testCase := range testCases {
-		got, err := parseDateString(testCase.candidate)
+		got, err := parseAbsoluteDateString(testCase.candidate)
 		if err != nil {
 			t.Errorf("got error %v when parsing date string parseDateString(%q)", err, testCase.candidate)
 		} else {

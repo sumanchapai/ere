@@ -48,7 +48,7 @@ func CheckEventsOnDate(date Date, events []Event) MatchingEvents {
 	matches.Today = make([]Event, 0)
 	matches.Knock = make([]KnockEvent, 0)
 	for _, event := range events {
-		eventDate, err := parseDateString(event.Date)
+		eventDate, err := parseAbsoluteDateString(event.Date)
 		if err != nil {
 			panic(err)
 		}

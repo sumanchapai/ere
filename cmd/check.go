@@ -28,7 +28,13 @@ You could search for events by AD (Gregorian) calendar:
 ere check 2022-10-29-AD 
 
 OR by BS (Nepali) calendar: 
-ere check 2080-7-12-BS.`,
+ere check 2080-7-12-BS.
+
+Instead of typing the date manually, to see the events for the day after tomorrow, run:
+ere check +2.
+
+To see events for yesterday, run:
+ere check -1.`,
 
 	Run: func(_ *cobra.Command, args []string) {
 		if len(args) == 0 {
@@ -37,7 +43,7 @@ ere check 2080-7-12-BS.`,
 			// Note that we are ignoring the error returned as part of the
 			// parseDateString because argument has been validated already
 			// by another function
-			date, _ := parseDateString(args[0])
+			date, _ := parseRelativeOrAbsoluteDate(args[0])
 			Check(date)
 		}
 	},
@@ -54,7 +60,7 @@ ere check 2080-7-12-BS.`,
 		}
 		if len(args) == 1 {
 			// Validate date argument
-			d, err := parseDateString(args[0])
+			d, err := parseRelativeOrAbsoluteDate(args[0])
 			if d.yearWildCard || d.monthWildCard || d.dayWildCard {
 				return errNoWildCardSupportedOnCheckCommandDateFormat
 			}

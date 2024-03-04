@@ -20,10 +20,25 @@ var (
 	Knock string
 )
 
+var errInvalidKnockValue = errors.New("invalid knock integer. must be > 0")
+
 // addCmd represents the add command
 var addCmd = &cobra.Command{
 	Use:   "add",
-	Short: "add an event",
+	Short: "Add an event",
+	Long: `Add an event
+
+To be reminded about poster presentation coming up on 29th october, run
+ere add 2025-10-29-AD --title "poster presentation"
+
+To be reminded about your friend's birthday on Kartik 12, every year run
+ere add "*-7-12-BS" --title "suman's birthday" --knock="1"
+	
+To be reminded about your calling sushant 7 days from today, run
+ere add "+7" --title "call sushant" --knock="1,2"
+
+Note the knock takes comma separated list of integers for the days before the event
+you want to be reminded about the event coming up.`,
 	Run: func(_ *cobra.Command, args []string) {
 		title, err := parseTitle(Title)
 		if err != nil {
@@ -33,7 +48,7 @@ var addCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal(err)
 		}
-		date, err := parseDateString(args[0])
+		date, err := parseRelativeOrAbsoluteDate(args[0])
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -46,7 +61,7 @@ var addCmd = &cobra.Command{
 		if len(args) > 1 {
 			return fmt.Errorf("takes only one argument, given %v", len(args))
 		}
-		_, err := parseDateString(args[0])
+		_, err := parseRelativeOrAbsoluteDate(args[0])
 		return err
 	},
 }
@@ -78,6 +93,9 @@ func parseKnock(knock string) ([]int, error) {
 		val, err := strconv.ParseInt(part, 10, 32)
 		if err != nil {
 			return knocks, err
+		}
+		if val < 1 {
+			return knocks, errInvalidKnockValue
 		}
 		knocks = append(knocks, int(val))
 	}

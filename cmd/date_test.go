@@ -14,7 +14,7 @@ func TestDateAfterAddition(t *testing.T) {
 		{candidate: "2024-2-28-AD", addDays: 3, expect: "2024-03-02-AD"},
 	}
 	for _, testCase := range testCases {
-		candidateDate, err := parseDateString(testCase.candidate)
+		candidateDate, err := parseAbsoluteDateString(testCase.candidate)
 		if err != nil {
 			panic(err)
 		}

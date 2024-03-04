@@ -20,6 +20,7 @@ const (
 )
 
 var (
+	errInvalidRelativeDate   = errors.New("invalid relative date string, has to be like: -23 or +34 or 5")
 	errInvalidDate           = errors.New("invalid date string")
 	errInvalidCalendarOnDate = errors.New("invalid calendar on date")
 )
@@ -82,9 +83,68 @@ func getTodaysDateInBS() Date {
 	return toReturn
 }
 
-// Parses the date string into a date object
+// This function takes as input relative or absolute date,
+// Relative date means date in relation to today, and it is written
+// as +1 or just 1 to refer to tomorrow, -2 to refer to the day before
+// yesterday. Absolute date is in the Date format which can be either
+// in AD (Gregorian) or the BS (Nepali) calendar.
+func parseRelativeOrAbsoluteDate(date string) (Date, error) {
+	date = strings.TrimSpace(date)
+	if date == "" {
+		return *new(Date), errInvalidDate
+	}
+	// Check if date is like "55" or "2"
+	i, err := strconv.ParseInt(date, 10, 64)
+	if err == nil {
+		thatDay := time.Now().Add(time.Duration(i * 24 * int64(time.Hour)))
+		return Date{
+			year:          thatDay.Year(),
+			month:         int(thatDay.Month()),
+			day:           thatDay.Day(),
+			yearWildCard:  false,
+			monthWildCard: false,
+			dayWildCard:   false,
+			calendar:      AD,
+		}, nil
+	}
+	// Check if date is like "+1" or "-3"
+	toMultiply := 1
+	isRelativeDate := false
+	// At this point, we can know that the date string is >= 1 in length, so we can
+	// safely check the index 0
+	switch date[0] {
+	case '+':
+		isRelativeDate = true
+	case '-':
+		isRelativeDate = true
+		toMultiply = -1
+	}
+	if isRelativeDate {
+		num, err := strconv.ParseInt(date[1:], 10, 64)
+		if err != nil {
+			return *new(Date), errInvalidRelativeDate
+		}
+		num = num * int64(toMultiply)
+		thatDay := time.Now().Add(time.Duration(num * 24 * int64(time.Hour)))
+		return Date{
+			year:          thatDay.Year(),
+			month:         int(thatDay.Month()),
+			day:           thatDay.Day(),
+			yearWildCard:  false,
+			monthWildCard: false,
+			dayWildCard:   false,
+			calendar:      AD,
+		}, nil
+	}
+	// At this point, date string is absolute, so we leave it upto the
+	// parseDateString function to handle that
+	return parseAbsoluteDateString(date)
+}
+
+// Parses the date string in format like YYYY-MM-DD-CALENDAR
+// (for example: 2010-10-12-AD) into a date object
 // error returned is non-nil if the date string is not parsable
-func parseDateString(date string) (Date, error) {
+func parseAbsoluteDateString(date string) (Date, error) {
 	// Remove whitespaces
 	date = strings.TrimSpace(date)
 	var toReturn Date
