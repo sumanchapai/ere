@@ -17,7 +17,7 @@ func DateAfterAddition(date Date, noOfDays int) Date {
 
 	// Add the date
 	t := time.Date(date.year, time.Month(date.month), date.day, 0, 0, 0, 0, time.Local)
-	durationToAdd := time.Duration(noOfDays * int(time.Hour) * 24)
+	durationToAdd := time.Duration(time.Duration(noOfDays) * time.Hour * 24)
 	t = t.Add(durationToAdd)
 	date.year = t.Year()
 	date.month = int(t.Month())
