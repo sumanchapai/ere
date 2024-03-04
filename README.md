@@ -98,6 +98,15 @@ mentioned above), I have the same list of events available on both computers.
 Note though that, you probably don't want to do this if your dotfiles directory
 is public because this would make your events public.
 
-## Installation
+## Installing / Updating `ere`
 
-Clone this repo then run `go install .`
+### For macOS/Linux
+
+```sh
+rm -f `which ere`
+curl -s https://ere-sumanchapai.vercel.app/install.txt | sh
+```
+
+### For Windows
+
+Have go >= 1.21 installed. Clone the repo, then run `go install .`
