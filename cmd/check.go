@@ -124,8 +124,8 @@ func PrintKnockEvents(events []KnockEvent) {
 func eventsFromEventsFile() []Event {
 	configFolder := ereConfigFolder()
 	eventsFile := filepath.Join(configFolder, ereEventsFileName)
-	_, err := os.Stat(eventsFile)
 	events := make([]Event, 0)
+	_, err := os.Stat(eventsFile)
 	if errors.Is(err, os.ErrNotExist) {
 		_, err := os.Create(eventsFile)
 		if err != nil {
@@ -139,6 +139,9 @@ func eventsFromEventsFile() []Event {
 		log.Fatal(err)
 	}
 	bytes, err := io.ReadAll(jsonFile)
+	if len(bytes) == 0 {
+		return events
+	}
 	if err != nil {
 		log.Fatal(err)
 	}
