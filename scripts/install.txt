@@ -13,7 +13,7 @@ add_usr_local_bin_to_path() {
 install_in_usr_local() {
   mkdir -p ~/.local 
   cd ~/.local
-  curl -s https://ere-sumanchapai.vercel.app/install.txt | sh
+  curl -s https://ere-sumanchapai.vercel.app/install_main.txt | sh
   # If command ere is not found add user .local/bin to path
   command -v ere || add_usr_local_bin_to_path
   cd -
