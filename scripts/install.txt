@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+add_usr_local_bin_to_path() {
+  TO_ADD=~/.local/bin
+  echo "\nAdding $TO_ADD to your path." 
+  echo "Either provide password for superuser permission to append to /etc/paths."
+  echo "Or press <Control+c> at this point and add it to path yourself\n"
+  echo $TO_ADD | sudo tee -a /etc/paths
+  LINE_TO_ADD="PATH=\$PATH:$TO_ADD" >> ~/.zshrc
+}
+
+install_in_usr_local() {
+  mkdir -p ~/.local 
+  cd ~/.local
+  curl -s https://ere-sumanchapai.vercel.app/install.txt | sh
+  # If command ere is not found add user .local/bin to path
+  command -v ere || add_usr_local_bin_to_path
+  cd -
+}
+
+install_in_usr_local
+(command -v ere && echo "\nere installed") || echo "\nRestart start your terminal and start using ere"
