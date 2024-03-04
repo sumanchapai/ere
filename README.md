@@ -54,18 +54,20 @@ To delete an event by given id, run\
 
 ## Checking for events
 
-To view today's events, you could also run\
+To view today's events, run\
 `ere check`
 
-To view yesterday's events, you could also run\
+To view yesterday's events, run\
 `ere check -1`
 
-To view day after tomorrow's events, you could also run\
+To view day after tomorrow's events, run\
 `ere check 2`
 
-You could also check for events at a particular date by running
-`ere check <date>`. For example: `ere check 2024-2-2-AD` to view events and
-knocks on 2nd Feb 2024.
+To view events on Oct 29, 2024, run\
+`ere check 2024-10-29-AD`
+
+To view events on Baiskah 10, 2078, run\
+`ere check 2078-1-10-BS`
 
 ### Automatically checking for today's events
 
