@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"io"
+	"log"
 	"os"
 )
 
@@ -27,10 +28,16 @@ func getLastLineWithSeek(filepath string) string {
 	}
 	for {
 		cursor -= 1
-		fileHandle.Seek(cursor, io.SeekEnd)
+		_, err := fileHandle.Seek(cursor, io.SeekEnd)
+		if err != nil {
+			log.Fatal(err)
+		}
 
 		char := make([]byte, 1)
-		fileHandle.Read(char)
+		_, err = fileHandle.Read(char)
+		if err != nil {
+			log.Fatal(err)
+		}
 
 		if cursor != -1 && (char[0] == 10 || char[0] == 13) { // stop if we find a line
 			break

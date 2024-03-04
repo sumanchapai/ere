@@ -142,6 +142,9 @@ func eventsFromEventsFile() []Event {
 	if err != nil {
 		log.Fatal(err)
 	}
-	json.Unmarshal(bytes, &events)
+	err = json.Unmarshal(bytes, &events)
+	if err != nil {
+		log.Fatal(err)
+	}
 	return events
 }

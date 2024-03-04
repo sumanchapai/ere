@@ -70,7 +70,10 @@ func init() {
 	rootCmd.AddCommand(addCmd)
 	addCmd.Flags().StringVarP(&Title, "title", "t", "", "title of the event")
 	addCmd.Flags().StringVarP(&Knock, "knock", "k", "", "knock")
-	addCmd.MarkFlagRequired("title")
+	err := addCmd.MarkFlagRequired("title")
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // Returns the title after parsing, if the parsing fails, the error returned is non-nil

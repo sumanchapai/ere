@@ -69,20 +69,6 @@ func getTodaysDateInAD() Date {
 	return toReturn
 }
 
-func getTodaysDateInBS() Date {
-	today := time.Now()
-	var toReturn Date
-	nepaliDate, err := dateConverter.EnglishToNepali(today.Year(), int(today.Month()), today.Day())
-	if err != nil {
-		log.Fatal(err)
-	}
-	toReturn.year = nepaliDate[0]
-	toReturn.month = nepaliDate[1]
-	toReturn.day = nepaliDate[2]
-	toReturn.calendar = BS
-	return toReturn
-}
-
 // This function takes as input relative or absolute date,
 // Relative date means date in relation to today, and it is written
 // as +1 or just 1 to refer to tomorrow, -2 to refer to the day before
