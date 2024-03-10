@@ -19,10 +19,6 @@ To be reminded the poster presentation every day for one week before the
 presentation run\
 `ere add 2025-10-29-AD --title "poster presentation" --knock="1,2,3,4,5,6,7"`.
 
-To _archive_ past events, run `ere archive`. This goes through each event and
-checks if this event won't arrive in the future again. If such, then it puts
-this event in the `archived.toml` file
-
 #### Yearly events (like birthdays)
 
 To be reminded about your friend's birthday on Kartik 12, run\
@@ -101,6 +97,14 @@ another computer and pull my dotfiles directory (and create the symlink like
 mentioned above), I have the same list of events available on both computers.
 Note though that, you probably don't want to do this if your dotfiles directory
 is public because this would make your events public.
+
+## Archive old events
+
+To archive past events, run `ere archive`. This goes through each event and
+checks if this event won't arrive in the future again. If such, then it puts
+this event in the `archived.toml` file. You can list all archived events using
+`ere ls --archive` and search through them using
+`ere search <pattern> --archive`
 
 ## Installing / Updating `ere`
 

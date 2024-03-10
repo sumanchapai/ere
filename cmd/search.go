@@ -29,7 +29,7 @@ ere search "^deadline.*urgent"
 			log.Fatal(err)
 		}
 		var fileName string
-		if listArchived {
+		if searchInArchived {
 			fileName = ereArchivedEventsFileName
 		} else {
 			fileName = ereActiveEventsFileName
@@ -49,5 +49,5 @@ ere search "^deadline.*urgent"
 
 func init() {
 	rootCmd.AddCommand(searchCmd)
-	searchCmd.PersistentFlags().BoolVar(&listArchived, "archive", false, "search through archived events")
+	searchCmd.PersistentFlags().BoolVar(&searchInArchived, "archive", false, "search through archived events")
 }
