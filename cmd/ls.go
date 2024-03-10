@@ -10,12 +10,20 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var listArchived bool
+
 // lsCmd represents the ls command
 var lsCmd = &cobra.Command{
 	Use:   "ls",
 	Short: "list all events",
 	Run: func(_ *cobra.Command, _ []string) {
-		allEvents := eventsFromEventsFile(ereActiveEventsFileName)
+		var fileName string
+		if listArchived {
+			fileName = ereArchivedEventsFileName
+		} else {
+			fileName = ereActiveEventsFileName
+		}
+		allEvents := eventsFromEventsFile(fileName)
 		lsTable(allEvents)
 	},
 }
@@ -45,4 +53,5 @@ func lsTable(events []Event) {
 
 func init() {
 	rootCmd.AddCommand(lsCmd)
+	lsCmd.PersistentFlags().BoolVar(&listArchived, "archive", false, "list archived events")
 }

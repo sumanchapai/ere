@@ -8,6 +8,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var searchInArchived bool
+
 // searchCmd represents the search command
 var searchCmd = &cobra.Command{
 	Use:   "search",
@@ -26,7 +28,14 @@ ere search "^deadline.*urgent"
 			fmt.Println("error in regular expression")
 			log.Fatal(err)
 		}
-		allEvents := eventsFromEventsFile(ereActiveEventsFileName)
+		var fileName string
+		if listArchived {
+			fileName = ereArchivedEventsFileName
+		} else {
+			fileName = ereActiveEventsFileName
+		}
+		allEvents := eventsFromEventsFile(fileName)
+
 		filteredEvents := make([]Event, 0)
 		for _, e := range allEvents {
 			if searchRegex.Match([]byte(e.Title)) {
@@ -40,4 +49,5 @@ ere search "^deadline.*urgent"
 
 func init() {
 	rootCmd.AddCommand(searchCmd)
+	searchCmd.PersistentFlags().BoolVar(&listArchived, "archive", false, "search through archived events")
 }
