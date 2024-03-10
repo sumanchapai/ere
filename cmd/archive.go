@@ -60,20 +60,16 @@ func canArchiveEvent(event Event) bool {
 	if eventDate.calendar == BS {
 		today = today.toBS()
 	}
-	fmt.Println("event", event, "evenDate", eventDate, "todaydate", today)
 	// If year is a wildcard, the event will come up again in the future
 	// thus cannot be archived
 	if eventDate.yearWildCard {
-		fmt.Println("1")
 		return false
 	}
 	if eventDate.year > today.year {
-		fmt.Println("2")
 		return false
 	}
 	// If the year is < current year, then this event won't arrive in the future
 	if eventDate.year < today.year {
-		fmt.Println("3")
 		return true
 	}
 	// Assert: event year is same as current year
@@ -84,11 +80,9 @@ func canArchiveEvent(event Event) bool {
 		if today.month == 12 {
 			// If the day is wildcard, it will match today/tomorrow thus cannot be archived
 			if eventDate.dayWildCard {
-				fmt.Println("4")
 				return false
 			} else {
 				// Otherwise archive only if it has already passed
-				fmt.Println("5")
 				return eventDate.day < today.day
 			}
 		} else {
@@ -97,28 +91,23 @@ func canArchiveEvent(event Event) bool {
 			// sometimes, the date might not come in the future months if the
 			// future months aren't long enough. For example if someone is trying to
 			// match around end of the month like: 30, 31, 32, etc.
-			fmt.Println("6")
 			return false
 		}
 	}
 	// Month has already passed, archive this event
 	if eventDate.month < today.month {
-		fmt.Println("7")
 		return true
 	}
 	// If month is yet to come, don't archive, although we might return some false positives
 	if eventDate.month > today.month {
-		fmt.Println("8")
 		return false
 	}
 	// Same month same year
 	// If the day is a wildcard, don't archive because it'll match today
 	if eventDate.dayWildCard {
-		fmt.Println("9")
 		return false
 	} else {
 		// Otherwise archive only if the day has already passed
-		fmt.Println("10")
 		return eventDate.day < today.day
 	}
 }
