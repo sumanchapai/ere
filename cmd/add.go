@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
@@ -12,6 +11,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/pelletier/go-toml"
 	"github.com/spf13/cobra"
 )
 
@@ -135,8 +135,10 @@ func saveEvents(events []Event) {
 	// Save the events
 	configFolder := ereConfigFolder()
 	eventsFile := filepath.Join(configFolder, ereEventsFileName)
+	var eventsFileModel EventsFileModel
+	eventsFileModel.Events = events
 	// Save the events
-	bytes, err := json.MarshalIndent(events, " ", "  ")
+	bytes, err := toml.Marshal(eventsFileModel)
 	if err != nil {
 		log.Fatal(err)
 	}

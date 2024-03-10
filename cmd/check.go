@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -10,6 +9,7 @@ import (
 	"path/filepath"
 	"sort"
 
+	"github.com/pelletier/go-toml"
 	"github.com/spf13/cobra"
 )
 
@@ -124,7 +124,11 @@ func PrintKnockEvents(events []KnockEvent) {
 func eventsFromEventsFile() []Event {
 	configFolder := ereConfigFolder()
 	eventsFile := filepath.Join(configFolder, ereEventsFileName)
+
+	var eventsFileModel EventsFileModel
 	events := make([]Event, 0)
+	eventsFileModel.Events = events
+
 	_, err := os.Stat(eventsFile)
 	if errors.Is(err, os.ErrNotExist) {
 		_, err := os.Create(eventsFile)
@@ -145,9 +149,9 @@ func eventsFromEventsFile() []Event {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = json.Unmarshal(bytes, &events)
+	err = toml.Unmarshal(bytes, &eventsFileModel)
 	if err != nil {
 		log.Fatal(err)
 	}
-	return events
+	return eventsFileModel.Events
 }

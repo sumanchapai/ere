@@ -8,6 +8,7 @@ require (
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/opensource-nepal/go-nepali v0.2.1 // indirect
+	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/rodaine/table v1.1.1 // indirect
 	github.com/spf13/cobra v1.8.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect

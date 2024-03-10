@@ -2,6 +2,10 @@ package cmd
 
 import "fmt"
 
+type EventsFileModel struct {
+	Events []Event
+}
+
 type Event struct {
 	Id    string // Usually, time.UnixNano is used for Id
 	Date  string
