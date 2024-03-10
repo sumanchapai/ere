@@ -8,9 +8,10 @@ import (
 )
 
 var (
-	ereConfigFolderName = ".ere"
-	ereCheckedFileName  = "checked.txt"
-	ereEventsFileName   = "events.toml"
+	ereConfigFolderName       = ".ere"
+	ereCheckedFileName        = "checked.txt"
+	ereActiveEventsFileName   = "events.toml"
+	ereArchivedEventsFileName = "archived.toml"
 )
 
 // Returns the ere config folder path

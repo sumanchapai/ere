@@ -119,7 +119,7 @@ func runAddCommand(date Date, title string, knock []int) {
 	event.Title = title
 	event.Knock = knock
 	// Get events list, and append to the events list
-	events := eventsFromEventsFile()
+	events := eventsFromEventsFile(ereActiveEventsFileName)
 	// Check if the event with same title and date already exists
 	for _, e := range events {
 		if e.Date == event.Date && e.Title == title {
@@ -127,14 +127,14 @@ func runAddCommand(date Date, title string, knock []int) {
 		}
 	}
 	events = append(events, event)
-	saveEvents(events)
+	saveEvents(events, ereActiveEventsFileName)
 }
 
 // Save events to the events file
-func saveEvents(events []Event) {
+func saveEvents(events []Event, filename string) {
 	// Save the events
 	configFolder := ereConfigFolder()
-	eventsFile := filepath.Join(configFolder, ereEventsFileName)
+	eventsFile := filepath.Join(configFolder, filename)
 	var eventsFileModel EventsFileModel
 	eventsFileModel.Events = events
 	// Save the events

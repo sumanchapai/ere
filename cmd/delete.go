@@ -12,7 +12,7 @@ var deleteCmd = &cobra.Command{
 	Short: "delete event by given id",
 	Run: func(_ *cobra.Command, args []string) {
 		id := args[0]
-		events := eventsFromEventsFile()
+		events := eventsFromEventsFile(ereActiveEventsFileName)
 		newEvents := make([]Event, 0)
 		found := false
 		for _, event := range events {
@@ -26,7 +26,7 @@ var deleteCmd = &cobra.Command{
 			fmt.Println("no event found with id", id)
 		} else {
 			// Save new events
-			saveEvents(newEvents)
+			saveEvents(newEvents, ereActiveEventsFileName)
 		}
 	},
 	Args: cobra.ExactArgs(1),

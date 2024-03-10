@@ -78,7 +78,7 @@ func init() {
 func Check(d Date) {
 	dates := datesForAllCalendar(d)
 	// Todo get events from JSON file
-	events := eventsFromEventsFile()
+	events := eventsFromEventsFile(ereActiveEventsFileName)
 	todayEvents := make([]Event, 0)
 	knockEvents := make(KnockEvents, 0)
 	for _, date := range dates {
@@ -119,11 +119,11 @@ func PrintKnockEvents(events []KnockEvent) {
 	}
 }
 
-// Get the list of events from events file
+// Get the list of events from the given filename
 // Creates the file it it doesn't exist and return empty list
-func eventsFromEventsFile() []Event {
+func eventsFromEventsFile(fileName string) []Event {
 	configFolder := ereConfigFolder()
-	eventsFile := filepath.Join(configFolder, ereEventsFileName)
+	eventsFile := filepath.Join(configFolder, fileName)
 
 	var eventsFileModel EventsFileModel
 	events := make([]Event, 0)

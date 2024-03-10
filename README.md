@@ -19,6 +19,10 @@ To be reminded the poster presentation every day for one week before the
 presentation run\
 `ere add 2025-10-29-AD --title "poster presentation" --knock="1,2,3,4,5,6,7"`.
 
+To _archive_ past events, run `ere archive`. This goes through each event and
+checks if this event won't arrive in the future again. If such, then it puts
+this event in the `archived.toml` file
+
 #### Yearly events (like birthdays)
 
 To be reminded about your friend's birthday on Kartik 12, run\
@@ -82,12 +86,12 @@ could just run `ere check` anytime to see events for that day or any day.
 
 All the data files are stored locally in `.ere` folder in the home directory.
 Run `ls ~/.ere` to see these files. The list of events is stored in a file
-called `~/.ere/events.json`. I have personally created this file in my dotfiles
-directory and created a symlink to `~/.ere/events.json` by running:
+called `~/.ere/events.toml`. I have personally created this file in my dotfiles
+directory and created a symlink to `~/.ere/events.toml` by running:
 
 ```
 mkdir -p ~/dotfiles/ere
-ln -sf "${HOME}/dotfiles/ere/events.json" "${HOME}/.ere/events.json"
+ln -sf "${HOME}/dotfiles/ere/events.toml" "${HOME}/.ere/events.toml"
 ```
 
 Note that my dotfiles folder lives in the home directory.

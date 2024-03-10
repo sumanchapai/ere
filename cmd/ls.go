@@ -15,7 +15,7 @@ var lsCmd = &cobra.Command{
 	Use:   "ls",
 	Short: "list all events",
 	Run: func(_ *cobra.Command, _ []string) {
-		allEvents := eventsFromEventsFile()
+		allEvents := eventsFromEventsFile(ereActiveEventsFileName)
 		lsTable(allEvents)
 	},
 }

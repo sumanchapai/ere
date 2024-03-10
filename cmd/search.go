@@ -26,7 +26,7 @@ ere search "^deadline.*urgent"
 			fmt.Println("error in regular expression")
 			log.Fatal(err)
 		}
-		allEvents := eventsFromEventsFile()
+		allEvents := eventsFromEventsFile(ereActiveEventsFileName)
 		filteredEvents := make([]Event, 0)
 		for _, e := range allEvents {
 			if searchRegex.Match([]byte(e.Title)) {
