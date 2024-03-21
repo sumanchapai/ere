@@ -57,6 +57,10 @@ To delete an event by given id, run\
 To view today's events, run\
 `ere check`
 
+To view yesterday's events, (note the extra -- because a - alone means flag is
+specified) run\
+`ere check -- -1`
+
 To view day after tomorrow's events, run\
 `ere check 2`
 
