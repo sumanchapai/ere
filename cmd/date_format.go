@@ -14,9 +14,9 @@ import (
 type Calendar string
 
 const (
-	AD            Calendar = "AD"
-	BS            Calendar = "BS"
-	dateSeparator          = "-"
+	AD Calendar = "AD"
+	BS Calendar = "BS"
+	// dateSeparator          = "-"
 )
 
 var (
@@ -56,7 +56,7 @@ func (d Date) String() string {
 	} else {
 		dayString = fmt.Sprintf("%02d", d.day)
 	}
-	return fmt.Sprintf("%v%v%v%v%v%v%v", yearString, dateSeparator, monthString, dateSeparator, dayString, dateSeparator, d.calendar)
+	return fmt.Sprintf("%v-%v-%v-%v", yearString, monthString, dayString, d.calendar)
 }
 
 func getTodaysDateInAD() Date {
@@ -139,7 +139,7 @@ func parseAbsoluteDateString(date string) (Date, error) {
 	// *-10-29-AD : every year, oct 29
 	// *-1-10-BS : every year, baiskah 10
 	// *-*-1-BS : the first of every nepali month
-	parts := strings.Split(date, dateSeparator)
+	parts := strings.Split(date, "-")
 	if len(parts) != 4 {
 		return toReturn, errInvalidDate
 	}
