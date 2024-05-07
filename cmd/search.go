@@ -23,7 +23,7 @@ To search events whose title begins with the world "deadline" and contains the w
 ere search "^deadline.*urgent"
 `,
 	Run: func(_ *cobra.Command, args []string) {
-		searchRegex, err := regexp.Compile(args[0])
+		searchRegex, err := regexp.Compile(fmt.Sprintf("(?i)%v", args[0]))
 		if err != nil {
 			fmt.Println("error in regular expression")
 			log.Fatal(err)
