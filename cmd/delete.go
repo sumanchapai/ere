@@ -9,7 +9,7 @@ import (
 // deleteCmd represents the delete command
 var deleteCmd = &cobra.Command{
 	Use:   "delete",
-	Short: "delete event by given id",
+	Short: "Delete event by given id",
 	Run: func(_ *cobra.Command, args []string) {
 		id := args[0]
 		events := eventsFromEventsFile(ereActiveEventsFileName)

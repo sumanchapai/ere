@@ -12,8 +12,7 @@ import (
 // archiveCmd represents the archive command
 var archiveCmd = &cobra.Command{
 	Use:   "archive",
-	Short: "archive past events",
-	Long:  `archive past events that aren't coming in the future`,
+	Short: "Archive past events",
 	Run: func(_ *cobra.Command, _ []string) {
 		archivedEvents := eventsFromEventsFile(ereArchivedEventsFileName)
 		activeEvents := eventsFromEventsFile(ereActiveEventsFileName)

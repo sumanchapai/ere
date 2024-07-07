@@ -12,8 +12,8 @@ var version string
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "print ngo version",
-	Long:  "print ngo version",
+	Short: "Print ere version",
+	Long:  "Print ere version",
 	Run: func(_ *cobra.Command, _ []string) {
 		fmt.Printf("%v\n", version)
 	},

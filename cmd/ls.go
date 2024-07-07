@@ -15,7 +15,7 @@ var listArchived bool
 // lsCmd represents the ls command
 var lsCmd = &cobra.Command{
 	Use:   "ls",
-	Short: "list all events",
+	Short: "List all events",
 	Run: func(_ *cobra.Command, _ []string) {
 		var fileName string
 		if listArchived {

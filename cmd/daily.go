@@ -15,8 +15,8 @@ import (
 // dailyCmd represents the daily command
 var dailyCmd = &cobra.Command{
 	Use:   "daily",
-	Short: "daily updates",
-	Long:  "print updates for today if it hasn't already been run",
+	Short: "Daily updates",
+	Long:  "Print updates for today if it hasn't already been run",
 	Run: func(_ *cobra.Command, _ []string) {
 		if !HasRunTodaysUpdates() {
 			// Run the check command with today's date
