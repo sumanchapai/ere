@@ -38,7 +38,7 @@ ere check -1.`,
 
 	Run: func(_ *cobra.Command, args []string) {
 		if len(args) == 0 {
-			Check(getTodaysDateInAD())
+			Check(getDateRelativeToTodayInAD(0))
 		} else {
 			// Note that we are ignoring the error returned as part of the
 			// parseDateString because argument has been validated already
@@ -115,6 +115,19 @@ func PrintKnockEvents(events []KnockEvent) {
 			fmt.Printf("in 1 day - %v\n", e.Title)
 		} else {
 			fmt.Printf("in %v days - %v\n", e.ComingUpIn, e.Title)
+		}
+	}
+}
+
+func PrintLookAheadEvents(events []KnockEvent) {
+	fmt.Print(yellow("Lookahead:\n"))
+	for _, e := range events {
+		if e.ComingUpIn == 0 {
+			fmt.Printf("today - %v |%s\n", e.Title, e.Date)
+		} else if e.ComingUpIn == 1 {
+			fmt.Printf("in 1 day - %v |%s\n", e.Title, e.Date)
+		} else {
+			fmt.Printf("in %v days - %v |%s\n", e.ComingUpIn, e.Title, e.Date)
 		}
 	}
 }

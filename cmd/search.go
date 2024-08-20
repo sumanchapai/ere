@@ -13,8 +13,8 @@ var searchInArchived bool
 // searchCmd represents the search command
 var searchCmd = &cobra.Command{
 	Use:   "search",
-	Short: "Search an event by title (regex is valid)",
-	Long: `Search an even by titlte (regex is allowed)
+	Short: "Search an event by title (regex is allowed)",
+	Long: `Search an event by title (regex is allowed)
 
 To search events with the word birthday in their title:
 ere search "birthday"

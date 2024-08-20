@@ -59,12 +59,13 @@ func (d Date) String() string {
 	return fmt.Sprintf("%v-%v-%v-%v", yearString, monthString, dayString, d.calendar)
 }
 
-func getTodaysDateInAD() Date {
-	today := time.Now()
+func getDateRelativeToTodayInAD(duration time.Duration) Date {
+	timeToConvert := time.Now()
+	timeToConvert = timeToConvert.Add(duration)
 	var toReturn Date
-	toReturn.year = today.Year()
-	toReturn.month = int(today.Month())
-	toReturn.day = today.Day()
+	toReturn.year = timeToConvert.Year()
+	toReturn.month = int(timeToConvert.Month())
+	toReturn.day = timeToConvert.Day()
 	toReturn.calendar = AD
 	return toReturn
 }

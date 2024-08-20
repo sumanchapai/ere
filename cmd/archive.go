@@ -51,7 +51,7 @@ var archiveCmd = &cobra.Command{
 // of some month like 30, 31 might be archivable if the date on one month has
 // passed and the next month isn't long enough.
 func canArchiveEvent(event Event) bool {
-	today := getTodaysDateInAD()
+	today := getDateRelativeToTodayInAD(0)
 	eventDate, err := parseAbsoluteDateString(event.Date)
 	if err != nil {
 		panic(err)
