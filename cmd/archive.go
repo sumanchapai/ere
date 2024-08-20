@@ -19,7 +19,7 @@ var archiveCmd = &cobra.Command{
 		newActiveEvents := make([]Event, 0)
 		archivedCount := 0
 		for _, activeEvent := range activeEvents {
-			// Check if the even is to be archived
+			// Check if the event is to be archived
 			if canArchiveEvent(activeEvent) {
 				archivedEvents = append(archivedEvents, activeEvent)
 				archivedCount++

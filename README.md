@@ -70,6 +70,13 @@ To view events on Oct 29, 2024, run\
 To view events on Baiskah 10, 2078, run\
 `ere check 2078-1-10-BS`
 
+## Lookahead
+
+To look `5` (use a number of your choice) days into the future, run\
+`ere la 5`
+
+Note that this computation takes time on the order of the number of days.
+
 ### Automatically checking for today's events
 
 There's is also a command called `ere daily` that runs the `ere check`
