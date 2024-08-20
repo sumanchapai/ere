@@ -120,7 +120,6 @@ func PrintKnockEvents(events []KnockEvent) {
 }
 
 func PrintLookAheadEvents(events []KnockEvent) {
-	fmt.Print(yellow("Lookahead:\n"))
 	for _, e := range events {
 		if e.ComingUpIn == 0 {
 			fmt.Printf("today - %v |%s\n", e.Title, e.Date)
