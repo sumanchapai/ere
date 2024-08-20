@@ -29,7 +29,7 @@ var laCmd = &cobra.Command{
 		}
 
 		knockEvents := make(KnockEvents, 0)
-		for i := 0; i < numberOfDaysToLookAhead; i++ {
+		for i := 0; i <= numberOfDaysToLookAhead; i++ {
 			dateInAD := getDateRelativeToTodayInAD(24 * time.Hour * time.Duration(i))
 			// Dates for all calendar
 			dates := datesForAllCalendar(dateInAD)
